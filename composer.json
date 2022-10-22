@@ -1,0 +1,15 @@
+{
+    "name": "Jakaria/Tablentor",
+    "authors": [
+        {
+            "name": "Jakaria",
+            "email": "hi@jakariaistauk.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jakaria\\Tablentor\\" : "includes/"
+        },
+        "files": [ "functions/functions.php" ]
+    }
+}
