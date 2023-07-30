@@ -58,7 +58,7 @@ class Basic_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_counter',
 			[
-				'label' => __( 'Section Count', 'tablentor' ),
+				'label' => __( 'Add Columns', 'tablentor' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -219,7 +219,7 @@ class Basic_Table extends Widget_Base {
 			$this->add_control(
 				'column_width',
 				[
-					'label' => __( 'column_width', 'tablentor' ),
+					'label' => __( 'Column Width', 'tablentor' ),
 					'type' => Controls_Manager::SLIDER,
 					'size_units' => [ 'px', '%' ],
 					'range' => [
@@ -351,8 +351,6 @@ class Basic_Table extends Widget_Base {
 				Group_Control_Typography::get_type(),
 				[
 					'name' => 'content_typography',
-					'label' => __( 'Typography', 'tablentor' ),
-					'scheme' => Typography::TYPOGRAPHY_1,
 					'selector' => '{{WRAPPER}} .ct-basic-table tr th',
 				]
 			);
@@ -447,11 +445,10 @@ class Basic_Table extends Widget_Base {
 				Group_Control_Typography::get_type(),
 				[
 					'name' => 'content_columns_typography',
-					'label' => __( 'Typography', 'tablentor' ),
-					'scheme' => Typography::TYPOGRAPHY_1,
 					'selector' => '{{WRAPPER}} .ct-basic-table tr td',
 				]
 			);
+
 
 			$this->add_group_control(
 				Group_Control_Background::get_type(),
@@ -531,9 +528,37 @@ class Basic_Table extends Widget_Base {
 							'max' => 100,
 						],
 					],
+					'default' => [
+						'unit' => 'px',
+						'size' => 50,
+					],
 					'selectors' => [
 						'{{WRAPPER}} .ct-basic-table tr th img' => 'width: {{SIZE}}{{UNIT}};',
 						'{{WRAPPER}} .ct-basic-table tr td img' => 'width: {{SIZE}}{{UNIT}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'column_img_height',
+				[
+					'label' => __( 'Image Height', 'tablentor' ),
+					'type' => Controls_Manager::SLIDER,
+					'size_units' => [ 'px', '%' ],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 1000,
+							'step' => 1,
+						],
+						'%' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'selectors' => [
+						'{{WRAPPER}} .ct-basic-table tr th img' => 'height: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .ct-basic-table tr td img' => 'height: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -614,7 +639,6 @@ class Basic_Table extends Widget_Base {
 			$rows_html .= "<tr>". implode( ' ', $column_html["row_{$row}"] ) ."</tr>";
 		}
 
-		$rows_html = wp_kses( $rows_html, 'post' );
-		echo "<div class='ct-basic-table-container'><table class='ct-basic-table' >" . wp_filter_post_kses( $rows_html ) . "</table></div>";
+		echo "<div class='ct-basic-table-container'><table class='ct-basic-table' >" . wp_kses_post( $rows_html ) . "</table></div>";
 	}
 }

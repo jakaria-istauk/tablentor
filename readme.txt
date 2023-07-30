@@ -2,8 +2,8 @@
 Contributors: jakariaistauk
 Tags: Elementor, Table designer, Elementor Addons, WooCommerce Elementor, Table, Table Creator, Table builder, Table customizer, WooCommerce
 Requires at least: 4.0
-Tested up to: 5.8
-Stable tag: 1.1.0
+Tested up to: 6.3
+Stable tag: 2.0.0
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -51,5 +51,18 @@ as many you want
 
 = v1.0.0 - 2021-11-20 =
 * Initial release
+
+= v1.1.0 - 2021-12-24 =
+*Increase column number
+*Fix issues
+*performance improved
+
+= v1.1.1 - 2022-11-07 =
+* Compatible with latest WordPress and Elementor
+
+= v2.0.0 - 2023-07-30 =
+* Image Rendering issue fixed
+* Image Height control added
+* Few bug fix and performance improved
 
 == Upgrade Notice ==
