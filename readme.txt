@@ -65,7 +65,7 @@ as many you want
 * Image Height control added
 * Few bug fix and performance improved
 
-= v2.1.0 - 2023-07-30 =
+= v2.1.0 - 2024-01-17 =
 * Fix error on Installation
 * Few bug fix and performance improved
 
