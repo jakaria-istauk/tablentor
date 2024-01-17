@@ -599,7 +599,7 @@ class Basic_Table extends Widget_Base {
 		$column_count = (int)sanitize_text_field( $settings['column_count'] );
 
 		if ( $column_count < 1 ) {
-			_e( 'Add Some Column', 'basic-table' );
+			esc_html_e( 'Add Some Column', 'basic-table' );
 			return;
 		}
 
