@@ -1,0 +1,14 @@
+#elementor-panel-elements .elementor-element .tablentor::after {
+    content: 'Tablentor';
+    color: #65656a;
+    position: absolute;
+    top: 31px;
+    left: -25px;
+    font-size: 15px;
+    padding: 3px 5px;
+    background: #fff;
+    border-radius: 4px;
+    transform: rotate(-90deg);
+    border: 1px solid #d5d8dc;
+    font-family: 'Roboto';
+}

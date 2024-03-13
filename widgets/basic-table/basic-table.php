@@ -46,7 +46,7 @@ class Basic_Table extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-table';
+		return 'eicon-table tablentor';
 	}
 
 	public function get_categories() {

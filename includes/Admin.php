@@ -20,4 +20,8 @@ class Admin{
     public function i18n() {
         load_plugin_textdomain( 'tablentor', false, CMPRTBL_DIR . '/languages/' );
     }
+
+    public function editor_enqueue_scripts(){
+        wp_enqueue_style( 'tablentor-editor', CMPRTBL_ASSET_DIR . "admin/css/editor.css", array(), time() );
+	}
 }

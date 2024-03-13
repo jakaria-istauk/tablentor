@@ -59,6 +59,15 @@ final class Plugin {
         define( 'CMPRTBL', __FILE__ );
         define( 'CMPRTBL_DIR', dirname( CMPRTBL ) );
         define( 'CMPRTBL_ASSETS', plugins_url( 'assets', CMPRTBL ) );
+
+        define( 'CMPRTBL_PREFIX', 'CMPRTBL' );
+        define( 'CMPRTBL_FILE', __FILE__ );
+        define( 'CMPRTBL_BASENAME', plugin_basename( __FILE__ ) );
+        define( 'CMPRTBL_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+        define( 'CMPRTBL_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
+        define( 'CMPRTBL_ASSET_DIR', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
+        // define( 'CMPRTBL_VERSION', '2.1.0' );
+        // define( 'CMPRTBL_DEV_MODE', file_exists( JIFA_PATH . '/.git' ) );
     }
 
     /**
@@ -68,6 +77,7 @@ final class Plugin {
 
         $admin = new Admin;
         add_action( 'plugins_loaded', [ $admin, 'i18n'] );
+        add_action( 'elementor/editor/after_enqueue_styles', [ $admin, 'editor_enqueue_scripts'] );
 
         $front = new Front;
         add_action( 'wp_head', [ $front, 'head' ] );
