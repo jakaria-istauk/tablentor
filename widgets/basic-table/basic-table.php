@@ -20,13 +20,6 @@ class Basic_Table extends Widget_Base {
 
 	public function __construct( $data = [], $args = null ) {
 	    parent::__construct( $data, $args );
-
-	    $this->id = 'basic-table';
-	    $this->widget = [
-	    	'title' => __( 'Basic Table' ),
-	    	'icon' => 'eicon-price-table',
-	    	'categories' => [ 'basic' ],
-	    ];
 	}
 
 	public function get_script_depends() {
@@ -38,11 +31,11 @@ class Basic_Table extends Widget_Base {
 	}
 
 	public function get_name() {
-			return $this->id;
+			return 'basic-table';
 	}
 
 	public function get_title() {
-		return $this->widget[ 'title' ];
+		return __( 'Basic Table', 'tablentor' );
 	}
 
 	public function get_icon() {
@@ -50,7 +43,7 @@ class Basic_Table extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return $this->widget[ 'categories' ];
+		return  [ 'basic' ];
 	}
 
 	protected function _register_controls() {
