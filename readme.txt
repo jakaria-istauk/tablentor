@@ -53,8 +53,8 @@ as many you want
 
 = v2.2.0 - 2024-03-28 =
 * Search option added
-* Widget indentifier added
-* Few bug fix and performance improved
+* Widget identifier added
+* A few bug fixes and performance improved
 
 = v2.1.0 - 2024-01-17 =
 * Fix error on Installation
