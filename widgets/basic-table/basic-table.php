@@ -124,7 +124,7 @@ class Basic_Table extends Widget_Base {
 				'default'   => 'right',
 				'toggle'    => false,
 				'selectors' => [
-					'{{WRAPPER}} .tablentor-bt-search' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .tablentor-bt-search' => 'display: flex;justify-content: {{VALUE}};',
 				],
 			]
 		);
@@ -242,6 +242,106 @@ class Basic_Table extends Widget_Base {
 						],
 					],
 					'title_field' => '{{{ list_title }}}',
+				]
+			);
+
+			$this->end_controls_section();
+
+			$this->start_controls_section(
+				'search_input_styling',
+				[
+					'label'     => __( 'Search Input', 'tablentor' ),
+					'tab'       => Controls_Manager::TAB_STYLE,
+					'condition' => [
+						'enable_table_search' => 'yes'
+					],
+				]
+			);
+
+			$this->add_group_control(
+				Group_Control_Typography::get_type(),
+				[
+					'name' => 'search_input_typography',
+					'selector' => '{{WRAPPER}} .tablentor-bt-search-input',
+				]
+			);
+
+			$this->add_control(
+				'search_input_text_color',
+				[
+					'label' => esc_html__( 'Text Color', 'tablentor' ),
+					'type' => Controls_Manager::COLOR,
+					'selectors' => [
+						'{{WRAPPER}} .tablentor-bt-search-input' => 'color: {{VALUE}}',
+					],
+				]
+			);
+
+			$this->add_group_control(
+				Group_Control_Border::get_type(),
+				[
+					'name' => 'search_input_border',
+					'selector' => '{{WRAPPER}} .tablentor-bt-search-input',
+				]
+			);
+
+			$this->add_control(
+				'search_input_border_radius',
+				[
+					'label' => esc_html__( 'Border Radius', 'tablentor' ),
+					'type' => Controls_Manager::DIMENSIONS,
+					'size_units' => [ 'px', '%', 'em', 'rem' ],
+					'default' => [
+						'top'    => 4,
+						'right'  => 4,
+						'bottom' => 4,
+						'left'   => 4,
+						'unit'   => 'px',
+						'isLinked' => true,
+					],
+					'selectors' => [
+						'{{WRAPPER}} .tablentor-bt-search-input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'search_input_border_padding',
+				[
+					'label' => esc_html__( 'Padding', 'tablentor' ),
+					'type' => Controls_Manager::DIMENSIONS,
+					'size_units' => [ 'px', '%', 'em', 'rem' ],
+					'default' => [
+						'top'    => 5,
+						'right'  => 5,
+						'bottom' => 5,
+						'left'   => 5,
+						'unit'   => 'px',
+						'isLinked' => true,
+					],
+					'selectors' => [
+						'{{WRAPPER}} .tablentor-bt-search-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'search_input_border_margin',
+				[
+					'label' => esc_html__( 'Margin', 'tablentor' ),
+					'type' => Controls_Manager::DIMENSIONS,
+					'size_units' => [ 'px', '%', 'em', 'rem' ],
+					'default' => [
+						'top'    => 0,
+						'right'  => 0,
+						'bottom' => 10,
+						'left'   => 0,
+						'unit'   => 'px',
+						'isLinked' => false,
+					],
+					'selectors' => [
+						'{{WRAPPER}} .tablentor-bt-search-input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
 				]
 			);
 
