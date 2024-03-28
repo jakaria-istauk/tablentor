@@ -23,11 +23,11 @@ class Basic_Table extends Widget_Base {
 	}
 
 	public function get_script_depends() {
-		return [];
+		return [ 'tablentor-basic-table' ];
 	}
 
 	public function get_style_depends() {
-		return [];
+		return [ 'tablentor-basic-table' ];
 	}
 
 	public function get_name() {
@@ -51,7 +51,7 @@ class Basic_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_counter',
 			[
-				'label' => __( 'Add Columns', 'tablentor' ),
+				'label' => __( 'General', 'tablentor' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -63,6 +63,69 @@ class Basic_Table extends Widget_Base {
 				'min' => 1,
 				'max' => 20,
 				'default' => 3
+			]
+		);
+
+		$this->add_control(
+			'enable_table_search',
+			[
+				'label'        => esc_html__( 'Enable Search', 'tablentor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'tablentor' ),
+				'label_off'    => esc_html__( 'No', 'tablentor' ),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'separator'    => 'before',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'search_input_content',
+			[
+				'label'     => __( 'Search Input', 'tablentor' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => [
+					'enable_table_search' => 'yes'
+				],
+			]
+		);
+
+		$this->add_control(
+			'search_input_placeholder',
+			[
+				'label'   => esc_html__( 'Placeholder', 'tablentor' ),
+				'type'    => Controls_Manager::TEXT,
+				'ai'      => [ 'active' => false ],
+				'default' => esc_html__( 'Search', 'tablentor' ),
+			]
+		);
+
+		$this->add_control(
+			'search_input_alingnment',
+			[
+				'label'   => esc_html__( 'Alignment', 'tablentor' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'tablentor' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'tablentor' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'tablentor' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'default'   => 'right',
+				'toggle'    => false,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-bt-search' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -632,6 +695,26 @@ class Basic_Table extends Widget_Base {
 			$rows_html .= "<tr>". implode( ' ', $column_html["row_{$row}"] ) ."</tr>";
 		}
 
-		echo "<div class='ct-basic-table-container'><table class='ct-basic-table' >" . wp_kses_post( $rows_html ) . "</table></div>";
+		echo "<div id='tablentor-bt-" . esc_attr( $this->get_id() ) . "' class='ct-basic-table-container'>";
+		if( 'yes' === $settings['enable_table_search'] ){
+			echo "<div class='tablentor-bt-search'>";
+			echo "<input class='tablentor-bt-search-input' placeholder='" . esc_attr( $settings['search_input_placeholder'] ) . "' />";
+			echo "</div>";
+		}
+		echo "<table class='ct-basic-table' >" . wp_kses_post( $rows_html ) . "</table>";
+		?>
+		<script>
+			jQuery(document).ready(function($){
+				var container_id = '#tablentor-bt-<?php echo esc_attr( $this->get_id() ); ?>';
+				$( container_id + " .tablentor-bt-search-input").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$( container_id + " .ct-basic-table tr").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+						});
+				});
+			});
+		</script>
+		<?php
+		echo "</div>";
 	}
 }

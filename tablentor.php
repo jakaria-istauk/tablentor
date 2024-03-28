@@ -58,16 +58,16 @@ final class Plugin {
         // constants
         define( 'CMPRTBL', __FILE__ );
         define( 'CMPRTBL_DIR', dirname( CMPRTBL ) );
-        define( 'CMPRTBL_ASSETS', plugins_url( 'assets', CMPRTBL ) );
+        define( 'CMPRTBL_ASSETS', plugins_url( 'assets/', CMPRTBL ) );
 
         define( 'CMPRTBL_PREFIX', 'CMPRTBL' );
         define( 'CMPRTBL_FILE', __FILE__ );
         define( 'CMPRTBL_BASENAME', plugin_basename( __FILE__ ) );
         define( 'CMPRTBL_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
         define( 'CMPRTBL_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
-        define( 'CMPRTBL_ASSET_DIR', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
-        // define( 'CMPRTBL_VERSION', '2.1.0' );
-        // define( 'CMPRTBL_DEV_MODE', file_exists( JIFA_PATH . '/.git' ) );
+        define( 'CMPRTBL_ASSET_DIR', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets/' ) );
+        define( 'CMPRTBL_VERSION', '2.1.0' );
+        define( 'CMPRTBL_DEV_MODE', file_exists( CMPRTBL_PATH . '/.git' ) );
     }
 
     /**
