@@ -4,7 +4,7 @@
  * Description: Create table using elementor.
  
  * Author: Jakaria Istauk
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author URI: https://profiles.wordpress.org/jakariaistauk/
  * Text Domain: tablentor
  * Domain Path: /languages
@@ -66,7 +66,7 @@ final class Plugin {
         define( 'CMPRTBL_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
         define( 'CMPRTBL_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
         define( 'CMPRTBL_ASSET_DIR', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets/' ) );
-        define( 'CMPRTBL_VERSION', '2.1.0' );
+        define( 'CMPRTBL_VERSION', '2.2.0' );
         define( 'CMPRTBL_DEV_MODE', file_exists( CMPRTBL_PATH . '/.git' ) );
     }
 

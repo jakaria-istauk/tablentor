@@ -1,4 +1,5 @@
-#elementor-panel-elements .elementor-element .tablentor::after {
+#elementor-panel-elements .elementor-element .tablentor::after,
+.elementor-panel-category-items .elementor-element-wrapper .elementor-element .tablentor::after{
     content: 'Tablentor';
     color: #65656a;
     position: absolute;
