@@ -11,3 +11,19 @@ function ct_pri( $data ) {
 	echo '</pre>';
 }
 endif;
+
+if( !function_exists('tablentor_widgets_list') ):
+function tablentor_widgets_list() {
+
+	return [
+		'basic-table' => [
+			'class' => 'Jakaria\\Tablentor\\Basic_Table',
+			'path'  => CMPRTBL_DIR . "/widgets/basic-table/basic-table.php"
+		],
+		'span-table' => [
+			'class' => 'Jakaria\\Tablentor\\Span_Table',
+			'path'  => CMPRTBL_DIR . "/widgets/span-table.php"
+		]
+	];
+}
+endif;

@@ -84,7 +84,7 @@ final class Plugin {
 
         $widgets = new Widgets;
         // add_action( 'elementor/elements/categories_registered', [ $widgets, 'register_category' ] );
-        add_action( 'elementor/widgets/widgets_registered', [ $widgets, 'register_widgets' ] );
+        add_action( 'elementor/widgets/register', [ $widgets, 'register_widgets' ] );
     }
  
     /**

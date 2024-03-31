@@ -41,15 +41,19 @@ class Widgets{
      *
      * @since 1.0
      */
-    public function register_widgets() {
-                // Jakaria\Tablentor
-        $file = CMPRTBL_DIR . "/widgets/basic-table/basic-table.php";
-        require_once( $file );
-        
-        $widget = "Jakaria\\Tablentor\\Basic_Table";
+    public function register_widgets( $widgets_manager ) {       
+        $widgets_list = tablentor_widgets_list();
 
-        if( class_exists( $widget ) ) {
-            Elementor_Plugin::instance()->widgets_manager->register_widget_type( new $widget() );
+        if( ! empty( $widgets_list ) ){
+            foreach( $widgets_list as $key => $widget ){
+                if( isset( $widget['path'] ) && '' !== $widget['path'] && isset( $widget['class'] ) && '' !== $widget['path'] ){
+                    require_once( $widget['path'] );
+
+                    if( class_exists( $widget['class'] ) ) {
+                        $widgets_manager->register( new $widget['class'] );
+                    }
+                }
+            }
         }
     }
 }
