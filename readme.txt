@@ -52,6 +52,7 @@ as many you want
 
 
 = v2.2.1 - 2024-09-14 =
+* Compitabilty added for Elementor cache
 * Compitable with new wordpress release
 * A few bug fixes and performance improved
 
