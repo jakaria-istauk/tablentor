@@ -2,9 +2,9 @@
 Contributors: jakariaistauk
 Tags: Elementor, Table designer, Elementor Addons, WooCommerce Elementor, Table, Table Creator, Table builder, Table customizer, WooCommerce
 Requires at least: 4.0
-Tested up to: 6.5
-Stable tag: 2.2.0
-Requires PHP: 5.4
+Tested up to: 6.6
+Stable tag: 2.2.1
+Requires PHP: 6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,10 @@ as many you want
 
 == Changelog ==
 
+
+= v2.2.1 - 2024-09-14 =
+* Compitable with new wordpress release
+* A few bug fixes and performance improved
 
 = v2.2.0 - 2024-03-28 =
 * Search option added

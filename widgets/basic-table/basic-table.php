@@ -46,6 +46,10 @@ class Basic_Table extends Widget_Base {
 		return  [ 'basic' ];
 	}
 
+	protected function is_dynamic_content():bool {
+		return false;
+	}
+
 	protected function _register_controls() {
 
 		$this->start_controls_section(
