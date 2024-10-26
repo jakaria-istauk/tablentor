@@ -2,11 +2,6 @@
 namespace Jakaria\Tablentor;
 
 use \Elementor\Plugin as Elementor_Plugin;
-use \Elementor\Controls_Manager;
-use \Elementor\Scheme_Typography;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Typography;
-use \Elementor\Group_Control_Box_Shadow;
 /**
  * if accessed directly, exit.
  */
@@ -37,19 +32,30 @@ class Widgets{
     }
 
     /**
-     * Registers THE widgets
+     * Register THE widgets
      *
      * @since 1.0
      */
     public function register_widgets() {
-                // Jakaria\Tablentor
-        $file = CMPRTBL_DIR . "/widgets/basic-table/basic-table.php";
-        require_once( $file );
-        
-        $widget = "Jakaria\\Tablentor\\Basic_Table";
+        $widgets = [
+            [
+                'path' => CMPRTBL_DIR . "/widgets/basic-table.php",
+                'class' => "Jakaria\\Tablentor\\Basic_Table"
+            ],
+            [
+                'path' => CMPRTBL_DIR . "/widgets/table-csv.php",
+                'class' => "Jakaria\\Tablentor\\Table_CSV"
+            ]
+        ];
 
-        if( class_exists( $widget ) ) {
-            Elementor_Plugin::instance()->widgets_manager->register_widget_type( new $widget() );
+        foreach ( $widgets as $widget ) {
+            if ( file_exists( $widget['path'] ) ) {
+                require_once( $widget['path'] );
+
+                if ( class_exists( $widget['class'] ) ) {
+                    Elementor_Plugin::instance()->widgets_manager->register( new $widget['class']() );
+                }
+            }
         }
     }
 }
