@@ -57,13 +57,48 @@ class Table_CSV extends Widget_Base {
 		);
 
 		$this->add_control(
+			'csv_type',
+			[
+				'label'   => esc_html__( 'CSV Type', 'tablentor' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'text' => [
+						'title' => esc_html__( 'Text', 'tablentor' ),
+						'icon' => 'eicon-animation-text',
+					],
+					'file' => [
+						'title' => esc_html__( 'File', 'tablentor' ),
+						'icon' => 'eicon-document-file',
+					],
+				],
+				'default' => 'text',
+				'toggle' => true,
+			]
+		);
+
+		$this->add_control(
 			'csv_text',
 			[
-				'label' => esc_html__( 'CSV Data', 'tablentor' ),
-				'type' => Controls_Manager::TEXTAREA,
-				'rows' => 10,
-				'ai' => [ 'active' => false ],
-				'default' => "name, age, address \nJohn, 25, 123 Street Name City \nJane, 30, 456 Another St Another City"
+				'label'     => esc_html__( 'CSV Data', 'tablentor' ),
+				'type'      => Controls_Manager::TEXTAREA,
+				'rows'      => 10,
+				'ai'        => [ 'active' =>false ],
+				'default'   => "name, age, address \nJohn, 25, 123 Street Name City \nJane, 30, 456 Another St Another City",
+				'condition' => [
+					'csv_type' => 'text'
+				]
+			]
+		);
+
+		$this->add_control(
+			'csv_file',
+			[
+				'label'       => esc_html__( 'Choose CSV File', 'textdomain' ),
+				'type'        => Controls_Manager::MEDIA,
+				'media_types' => [ 'csv' ],
+				'condition'   => [
+					'csv_type' => 'file'
+				]
 			]
 		);
 
@@ -646,8 +681,19 @@ class Table_CSV extends Widget_Base {
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
+		$csv_text = '';
 
-		$csv_text = $settings['csv_text'];
+		if ( 'text' === $settings['csv_type'] ) {
+			$csv_text = $settings['csv_text'];
+		} else if ( 'file' === $settings['csv_type'] ) {
+			if ( ! empty( $settings['csv_file']['url'] ) ) {
+				$fileExtension = pathinfo($settings['csv_file']['url'], PATHINFO_EXTENSION );
+				if ( strtolower( $fileExtension) !== 'csv' ) {
+					esc_html_e( 'Error: The file is not a CSV.', 'tablentor' );
+					return;
+				}
+			}
+		}
 
 		if ( empty( $csv_text ) ) {
 			return;
