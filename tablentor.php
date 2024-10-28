@@ -22,6 +22,8 @@
 
 namespace Jakaria\Tablentor;
 
+use Jakaria\Tablentor\Controls\CSV_Control;
+
 /**
  * if accessed directly, exit.
  */
@@ -49,6 +51,7 @@ final class Plugin {
      */
     public function include() {
         require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
+        require_once( dirname( __FILE__ ) . '/controls/CSV_Control.php' );
     }
 
     /**
@@ -85,6 +88,11 @@ final class Plugin {
         $widgets = new Widgets;
         // add_action( 'elementor/elements/categories_registered', [ $widgets, 'register_category' ] );
         add_action( 'elementor/widgets/widgets_registered', [ $widgets, 'register_widgets' ] );
+
+        add_action( 'elementor/controls/controls_registered', function( $controls_manager )  {
+            $controls_manager->register_control('tablentor-csv', new CSV_Control());
+        } );
+        
     }
  
     /**

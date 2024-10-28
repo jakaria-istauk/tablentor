@@ -93,9 +93,9 @@ class Table_CSV extends Widget_Base {
 		$this->add_control(
 			'csv_file',
 			[
-				'label'       => esc_html__( 'Choose CSV File', 'textdomain' ),
-				'type'        => Controls_Manager::MEDIA,
-				'media_types' => [ 'csv' ],
+				'label'       => esc_html__( 'File Url', 'textdomain' ),
+				'type'        => 'tablentor-csv',
+				// 'media_types' => [ 'application/csv' ],
 				'condition'   => [
 					'csv_type' => 'file'
 				]
