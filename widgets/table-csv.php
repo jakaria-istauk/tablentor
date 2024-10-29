@@ -93,9 +93,11 @@ class Table_CSV extends Widget_Base {
 		$this->add_control(
 			'csv_file',
 			[
-				'label'       => esc_html__( 'File Url', 'textdomain' ),
-				'type'        => 'tablentor-csv',
-				// 'media_types' => [ 'application/csv' ],
+				'label'       => esc_html__( 'File Url', 'tablentor' ),
+				'type'        => Controls_Manager::URL,
+				'options'     => false,
+				'label_block' => true,
+				'placeholder' => esc_html__( 'Paste your csv URL', 'tablentor' ),
 				'condition'   => [
 					'csv_type' => 'file'
 				]
@@ -692,6 +694,16 @@ class Table_CSV extends Widget_Base {
 					esc_html_e( 'Error: The file is not a CSV.', 'tablentor' );
 					return;
 				}
+
+				$csvContent = file_get_contents($settings['csv_file']['url'] );
+
+				if ($csvContent === false) {
+					echo "Error: Unable to retrieve the CSV file.";
+					return [];
+				}
+
+				// Split CSV content into rows by newline
+				$rows = preg_split('/\r\n|\n|\r/', trim($csvContent));
 			}
 		}
 
