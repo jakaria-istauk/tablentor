@@ -62,6 +62,7 @@ class Widgets{
 
     public function enqueue_styles(){
         wp_enqueue_style( 'tablentor-data-table', CMPRTBL_ASSET_DIR . "front/css/data-table.min.css", array(), CMPRTBL_VERSION );
+        wp_enqueue_style( 'tablentor-table-csv', CMPRTBL_ASSET_DIR . "front/css/table-csv.css", array(), time() );
     }
 
     public function enqueue_scripts() {

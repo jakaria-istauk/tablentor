@@ -1,0 +1,4 @@
+.tablentor-table-csv-container,
+.tablentor-table-csv-container div.dt-container div.dt-layout-row {
+    overflow: scroll;
+}
