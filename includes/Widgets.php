@@ -58,4 +58,14 @@ class Widgets{
             }
         }
     }
+
+
+    public function enqueue_styles(){
+        wp_enqueue_style( 'tablentor-data-table', CMPRTBL_ASSET_DIR . "front/css/data-table.min.css", array(), CMPRTBL_VERSION );
+    }
+
+    public function enqueue_scripts() {
+        wp_enqueue_script( 'tablentor-data-table', CMPRTBL_ASSET_DIR . "front/js/data-table.min.js", [ 'jquery' ], CMPRTBL_VERSION, true );
+        wp_enqueue_script( 'tablentor-table-csv', CMPRTBL_ASSET_DIR . "front/js/table-csv.js", [ 'jquery' ], time(), true );
+    }
 }

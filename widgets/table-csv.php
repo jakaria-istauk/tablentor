@@ -60,7 +60,7 @@ class Table_CSV extends Widget_Base {
 			'csv_type',
 			[
 				'label'   => esc_html__( 'CSV Type', 'tablentor' ),
-				'type'    => Controls_Manager::CHOOSE,
+				'type'    => Controls_Manager::HIDDEN,
 				'options' => [
 					'text' => [
 						'title' => esc_html__( 'Text', 'tablentor' ),
@@ -715,7 +715,8 @@ class Table_CSV extends Widget_Base {
 
 		if ( empty( $rows ) ) return;
 
-		echo "<div id='tablentor-table-csv-" . esc_attr( $this->get_id() ) . "' class='tablentor-table-csv-container'>";
+		$table_css_id = 'tablentor-table-csv-' . $this->get_id();
+		echo "<div id='" . esc_attr( $table_css_id ) . "' class='tablentor-table-csv-container'>";
 		if( 'yes' === $settings['enable_table_search'] ){
 			echo "<div class='tablentor-csv-search'>";
 			echo "<input class='tablentor-csv-search-input' placeholder='" . esc_attr( $settings['search_input_placeholder'] ) . "' />";

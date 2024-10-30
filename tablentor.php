@@ -85,6 +85,8 @@ final class Plugin {
         $widgets = new Widgets;
         // add_action( 'elementor/elements/categories_registered', [ $widgets, 'register_category' ] );
         add_action( 'elementor/widgets/widgets_registered', [ $widgets, 'register_widgets' ] );
+        add_action( 'elementor/frontend/after_enqueue_styles', [ $widgets, 'enqueue_styles' ] );
+        add_action( 'elementor/frontend/after_enqueue_scripts', [ $widgets, 'enqueue_scripts' ] );
     }
  
     /**
