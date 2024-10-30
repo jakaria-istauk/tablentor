@@ -1,13 +1,12 @@
 let TableCSV = function( $scope, $ ){
     var section_id = $scope.data('id'),
-        table_id = '#tablentor-table-csv-'+section_id;
+        table_id = '#tablentor-table-csv-'+section_id,
+        is_data_table = $(table_id).data('table');
     
-        new DataTable( table_id + ' .tablentor-table-csv', {
-            responsive: true,
-            searching: false,
-            paging: false,
-            ordering:  false
-        });
+        if ( is_data_table && 'yes' === is_data_table ) {
+            new DataTable( table_id + ' .tablentor-table-csv', {
+            });
+        }
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
