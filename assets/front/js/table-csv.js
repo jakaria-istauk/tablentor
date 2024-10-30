@@ -3,7 +3,10 @@ let TableCSV = function( $scope, $ ){
         table_id = '#tablentor-table-csv-'+section_id;
     
         new DataTable( table_id + ' .tablentor-table-csv', {
-            responsive: true
+            responsive: true,
+            searching: false,
+            paging: false,
+            ordering:  false
         });
 }
 

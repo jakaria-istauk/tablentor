@@ -114,21 +114,33 @@ class Table_CSV extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'enable_data_table',
+			[
+				'label'        => esc_html__( 'Enable Data Table', 'tablentor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'description' => __( 'Data tables are used to organize and display data in a structured grid. Learn more at <a href="https://example.com/data-tables" target="_blank">Data Tables</a>.'),
+			]
+		);
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'search_input_content',
+			'data_table_settings_section',
 			[
-				'label'     => __( 'Search Input', 'tablentor' ),
+				'label'     => __( 'Data Table', 'tablentor' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition'   => [
+					'enable_data_table' => 'yes'
+				]
 			]
 		);
 
 		$this->add_control(
-			'enable_table_search',
+			'search_input',
 			[
-				'label'        => esc_html__( 'Enable', 'tablentor' ),
+				'label'        => esc_html__( 'Search Input', 'tablentor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'no',
