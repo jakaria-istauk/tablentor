@@ -1,6 +1,7 @@
 <?php
 namespace Jakaria\Tablentor;
 
+use Elementor\Plugin;
 use Elementor\Utils;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
@@ -773,6 +774,8 @@ class Table_CSV extends Widget_Base {
 			if ( 'yes' === $settings['sorting'] ) {
 				$this->add_render_attribute( 'table-csv-wrapper', 'data-sorting', 'yes' );
 			}
+		} else {
+			$this->add_render_attribute( 'table-csv-wrapper', 'class', 'no-data-table' );
 		}
 
 		echo '<div '; $this->print_render_attribute_string( 'table-csv-wrapper' ); echo '>';
@@ -797,18 +800,32 @@ class Table_CSV extends Widget_Base {
 		}
 
 		echo "<tbody>";
+		$is_editor = Plugin::instance()->editor->is_edit_mode();
+		$row_count = 0;
 		foreach ( $rows as $key => $line ) {
 			if ( ! empty( trim( $line ) ) ) {
 				$columns = str_getcsv($line);
 				echo '<tr>';
 				foreach( $columns as $column ) {
-					echo "<td>" . esc_html( trim( $column ) ) . "</td>";
+					echo "<td>" . $this->parse_text_editor( $column ) . "</td>";
 				}
 				echo '</tr>';
+			}
+
+			$row_count ++;
+			if ( $is_editor && $row_count > 11 ) {
+				break;
 			}
 		}
 		echo "</tbody>";
 		echo "</table>";
+
+		if ( $is_editor ) {
+			echo '<div style="background-color:#e7f3fe; color: #31708f;border-color: #bce8f1;padding: 15px;margin-top: 20px;border-radius: 5px;border: 1px solid #ddd;font-family: Arial, sans-serif;">
+				<strong>' . esc_html__( 'Note:', 'tablentor' ) . '</strong> ' . esc_html__( 'All Data Will load on frontend', 'tablentor' ) . '
+			</div>';
+		}
+		
 		echo "</div>";
 	}
 }
