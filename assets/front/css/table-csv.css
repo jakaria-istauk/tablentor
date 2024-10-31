@@ -1,4 +1,7 @@
-.tablentor-table-csv-container,
+.tablentor-table-csv-container:not(.data-table-initialized, .no-data-table) {
+    overflow: hidden;
+}
+
 .tablentor-table-csv-container div.dt-container div.dt-layout-row {
     overflow: scroll;
 }

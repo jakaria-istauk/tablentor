@@ -14,7 +14,10 @@ let TableCSV = function( $scope, $ ){
                 paging: 'yes' === is_paginate,
                 ordering: 'yes' === is_srting,
                 searching: 'yes' === is_search,
-            });
+                initComplete: function(){
+                    $(table_id).addClass('data-table-initialized');
+                }
+            })
         }
 }
 
