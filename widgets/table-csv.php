@@ -122,6 +122,9 @@ class Table_CSV extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'description' => __( 'Data tables are used to organize and display data in a structured grid. Learn more at <a href="https://example.com/data-tables" target="_blank">Data Tables</a>.'),
+				'condition'   => [
+					'first_row_as_header' => 'yes'
+				]
 			]
 		);
 
@@ -133,7 +136,8 @@ class Table_CSV extends Widget_Base {
 				'label'     => __( 'Data Table', 'tablentor' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition'   => [
-					'enable_data_table' => 'yes'
+					'enable_data_table' => 'yes',
+					'first_row_as_header' => 'yes'
 				]
 			]
 		);
@@ -151,20 +155,6 @@ class Table_CSV extends Widget_Base {
 		);
 
 		$this->add_control(
-			'search_input_placeholder',
-			[
-				'label'   => esc_html__( 'Placeholder', 'tablentor' ),
-				'type'    => Controls_Manager::TEXT,
-				'ai'      => [ 'active' => false ],
-				'default' => esc_html__( 'Search', 'tablentor' ),
-				'separator'    => 'after',
-				'condition' => [
-					'search_input' => 'yes'
-				],
-			]
-		);
-
-		$this->add_control(
 			'pagination',
 			[
 				'label'        => esc_html__( 'Pagination', 'tablentor' ),
@@ -177,6 +167,21 @@ class Table_CSV extends Widget_Base {
 		);
 
 		$this->add_control(
+			'top_bar_pagination',
+			[
+				'label'        => esc_html__( 'Header Entry Manager', 'tablentor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'tablentor' ),
+				'label_off'    => esc_html__( 'Hide', 'tablentor' ),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'condition'   => [
+					'pagination' => 'yes',
+				]
+			]
+		);
+
+		$this->add_control(
 			'sorting',
 			[
 				'label'        => esc_html__( 'Sorting', 'tablentor' ),
@@ -185,36 +190,6 @@ class Table_CSV extends Widget_Base {
 				'label_off'    => esc_html__( 'Disable', 'tablentor' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
-			]
-		);
-
-		$this->add_control(
-			'search_input_alingnment',
-			[
-				'label'   => esc_html__( 'Alignment', 'tablentor' ),
-				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'tablentor' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'tablentor' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'tablentor' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'default'   => 'right',
-				'toggle'    => false,
-				'selectors' => [
-					'{{WRAPPER}} .tablentor-bt-search' => 'display: flex;justify-content: {{VALUE}};',
-				],
-				'condition' => [
-					'enable_table_search' => 'yes'
-				],
 			]
 		);
 
@@ -754,6 +729,7 @@ class Table_CSV extends Widget_Base {
 
 		if ( empty( $rows ) ) return;
 
+		$is_editor = Plugin::instance()->editor->is_edit_mode();
 		$table_css_id = 'tablentor-table-csv-' . $this->get_id();
 		$this->add_render_attribute( 'table-csv-wrapper', [
 			'id' => $table_css_id,
@@ -761,19 +737,34 @@ class Table_CSV extends Widget_Base {
 		]);
 
 		if ( 'yes' === $settings['enable_data_table'] ) {
-			$this->add_render_attribute( 'table-csv-wrapper', 'data-table', 'yes' );
+			$options = [ 'table' => 'yes' ];
 
 			if ( 'yes' === $settings['search_input'] ) {
-				$this->add_render_attribute( 'table-csv-wrapper', 'data-search', 'yes' );
+				$options['searching'] = 'yes';
 			}
 
 			if ( 'yes' === $settings['pagination'] ) {
-				$this->add_render_attribute( 'table-csv-wrapper', 'data-pagination', 'yes' );
+				$options['paging'] = 'yes';
+			}
+
+			if ( 'yes' !== $settings['search_input'] && 'yes' !== $settings['pagination'] ) {
+				$this->add_render_attribute( 'table-csv-wrapper', 'class', 'hide-table-heading' );
+			}
+
+			if ( isset( $settings['top_bar_pagination'] ) && 'yes' !== $settings['top_bar_pagination'] ) {
+				$options['paging_length'] = 'no';
+
+				if ( $is_editor ) {
+					$this->add_render_attribute( 'table-csv-wrapper', 'class', 'hide-table-length' );
+				}
 			}
 
 			if ( 'yes' === $settings['sorting'] ) {
-				$this->add_render_attribute( 'table-csv-wrapper', 'data-sorting', 'yes' );
+				$options['ordering'] = 'yes';
 			}
+
+			$options = base64_encode( wp_json_encode( $options ) );
+			$this->add_render_attribute( 'table-csv-wrapper', 'data-table', $options );
 		} else {
 			$this->add_render_attribute( 'table-csv-wrapper', 'class', 'no-data-table' );
 		}
@@ -800,7 +791,6 @@ class Table_CSV extends Widget_Base {
 		}
 
 		echo "<tbody>";
-		$is_editor = Plugin::instance()->editor->is_edit_mode();
 		$row_count = 0;
 		foreach ( $rows as $key => $line ) {
 			if ( ! empty( trim( $line ) ) ) {
@@ -813,7 +803,7 @@ class Table_CSV extends Widget_Base {
 			}
 
 			$row_count ++;
-			if ( $is_editor && $row_count > 11 ) {
+			if ( $is_editor && $row_count > 12 ) {
 				break;
 			}
 		}

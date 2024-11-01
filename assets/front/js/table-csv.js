@@ -1,24 +1,35 @@
 let TableCSV = function( $scope, $ ){
     var section_id = $scope.data('id'),
-        table_id = '#tablentor-table-csv-'+section_id,
-        is_data_table = $(table_id).data('table');
-    
-        if ( is_data_table && 'yes' === is_data_table ) {
-            let table_wrapper =  $(table_id);
-                is_paginate = table_wrapper.data('pagination'),
-                is_srting = table_wrapper.data('sorting'),
-                is_search = table_wrapper.data('search');
+        wrapper_id = '#tablentor-table-csv-'+section_id,
+        tableWrapper = $(wrapper_id);
+        table_id = $(wrapper_id + ' .tablentor-table-csv');
+        options = tableWrapper.data('table');        
 
-            new DataTable( table_id + ' .tablentor-table-csv', {
-                responsive: true,
-                paging: 'yes' === is_paginate,
-                ordering: 'yes' === is_srting,
-                searching: 'yes' === is_search,
-                initComplete: function(){
-                    $(table_id).addClass('data-table-initialized');
-                }
-            })
+    if ( ! options ) {
+        return;
+    }
+
+    options = JSON.parse( atob(options) );
+
+    if ( ! options.table || 'yes' !== options.table ) {
+        return;
+    }
+
+    new DataTable(table_id, {
+        paging: 'yes' === options?.paging,
+        ordering: 'yes' === options?.ordering,
+        searching: 'yes' === options?.searching,
+        initComplete: function(){
+            tableWrapper.addClass('data-table-initialized');
+            if ( 'yes' !== options?.paging ) {
+                $(table_id).find('.dt-info').remove();
+            }
+
+            if ( 'no' === options?.paging_length ) {
+                tableWrapper.find('.dt-length').remove()
+            }
         }
+    });
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
