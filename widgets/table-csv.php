@@ -602,138 +602,19 @@ class Table_CSV extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
-		 * Table Styling
+		 * Table body Styling
 		 *  
 		 */
 		$this->start_controls_section(
-			'Table_Design',
+			'table_body',
 			[
-				'label' => __( 'Table Styling', 'tablentor' ),
+				'label' => __( 'Table Body', 'tablentor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
-			'view',
-			[
-				'label' => __( 'View', 'tablentor' ),
-				'type' => Controls_Manager::HIDDEN,
-				'default' => 'traditional',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table' => 'margin:0;overflow:hidden;',
-					'{{WRAPPER}} .ct-basic-table tr td, {{WRAPPER}} .ct-basic-table tr th' => 'overflow:hidden;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'column_width',
-			[
-				'label' => __( 'Column Width', 'tablentor' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-						'step' => 1,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr th' => 'width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .ct-basic-table tr td' => 'width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'table_background',
-				'label' => __( 'Background', 'tablentor' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .ct-basic-table',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'table_border',
-				'label' => __( 'Border', 'tablentor' ),
-				'selector' => '{{WRAPPER}} .ct-basic-table',
-				'separator'	=> 'before'
-			]
-		);
-
-		$this->add_control(
-			'table-border-radius',
-			[
-				'label' => __( 'Border Radius', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'after',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'table_box_shadow',
-				'label' => __( 'Box Shadow', 'tablentor' ),
-				'selector' => '{{WRAPPER}} .ct-basic-table',
-				'separator'	=> 'before'
-			]
-		);
-
-		$this->add_control(
-			'table_padding',
-			[
-				'label' => __( 'Padding', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'before',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'table_margin',
-			[
-				'label' => __( 'Margin', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-		/**
-		 * Table Columns Styling
-		 *  
-		 */
-		$this->start_controls_section(
-			'table_columns',
-			[
-				'label' => __( 'Table Columns', 'tablentor' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'column_content_typography',
+			'table_body_content_alignment',
 			[
 				'label' 	   => __( 'Alignment', 'tablentor' ),
 				'type' 		   => Controls_Manager::CHOOSE,
@@ -752,7 +633,7 @@ class Table_CSV extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr td' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -760,19 +641,30 @@ class Table_CSV extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'content_columns_typography',
-				'selector' => '{{WRAPPER}} .ct-basic-table tr td',
+				'name' => 'table_body_content_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td',
 			]
 		);
 
+		$this->add_control(
+			'text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'tablentor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td' => 'color: {{VALUE}}',
+				],
+			]
+		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'table_columns_background',
-				'label' => __( 'Background', 'tablentor' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .ct-basic-table tr td',
+				'name'     => 'table_body_content_background',
+				'label'    => __( 'Background', 'tablentor' ),
+				'types'    => [ 'classic', 'gradient' ],
+				'exclude'  => [ 'image' ],
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td',
 			]
 		);
 
@@ -780,125 +672,35 @@ class Table_CSV extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'table__columns_border',
-				'label' => __( 'Border', 'tablentor' ),
-				'selector' => '{{WRAPPER}} .ct-basic-table tr td',
-				'separator'	=> 'before'
+				'name'      => 'table_body_content_border',
+				'label'     => __( 'Border', 'tablentor' ),
+				'selector'  => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td',
+				'separator' => 'before'
 			]
 		);
 
 		$this->add_control(
-			'table_columns-border-radius',
+			'table_body_content_border_radius',
 			[
-				'label' => __( 'Border Radius', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => __( 'Border Radius', 'tablentor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'after',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr td' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'separator'	 => 'after',
+				'selectors'  => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'table_columns_padding',
+			'table_body_content_padding',
 			[
-				'label' => __( 'Padding', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => __( 'Padding', 'tablentor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'before',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-		/**
-		 * Table Styling
-		 *  
-		 */
-		$this->start_controls_section(
-			'table_imge_design',
-			[
-				'label' => __( 'Table Images', 'tablentor' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'column_img_width',
-			[
-				'label' => __( 'Image Width', 'tablentor' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-						'step' => 1,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 50,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr th img' => 'width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .ct-basic-table tr td img' => 'width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'column_img_height',
-			[
-				'label' => __( 'Image Height', 'tablentor' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-						'step' => 1,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr th img' => 'height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .ct-basic-table tr td img' => 'height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'table__images_border',
-				'label' => __( 'Border', 'tablentor' ),
-				'selector' => '{{WRAPPER}} .ct-basic-table tr td img, {{WRAPPER}} .ct-basic-table tr th img',
-				'separator'	=> 'before'
-			]
-		);
-
-		$this->add_control(
-			'table_images-border-radius',
-			[
-				'label' => __( 'Border Radius', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'after',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr td img, {{WRAPPER}} .ct-basic-table tr th img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'separator'	 => 'before',
+				'selectors'  => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv tbody tr td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
