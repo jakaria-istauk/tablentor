@@ -169,7 +169,7 @@ class Table_CSV extends Widget_Base {
 		$this->add_control(
 			'top_bar_pagination',
 			[
-				'label'        => esc_html__( 'Header Entry Manager', 'tablentor' ),
+				'label'        => esc_html__( 'Entries Per Page', 'tablentor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tablentor' ),
 				'label_off'    => esc_html__( 'Hide', 'tablentor' ),
@@ -198,11 +198,50 @@ class Table_CSV extends Widget_Base {
 		$this->start_controls_section(
 			'search_input_styling',
 			[
-				'label'     => __( 'Search Input', 'tablentor' ),
+				'label'     => __( 'Search', 'tablentor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
-					'enable_table_search' => 'yes'
+					'search_input'        => 'yes',
+					'enable_data_table'   => 'yes',
+					'first_row_as_header' =>  'yes'
 				],
+			]
+		);
+
+		$this->add_control(
+			'search_input_label_styling_heading',
+			[
+				'label' => esc_html__( 'Label', 'tablentor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'search_input_label_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-search label',
+			]
+		);
+
+		$this->add_control(
+			'search_input_label_color',
+			[
+				'label' => esc_html__( 'Text Color', 'tablentor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-search label' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'search_input_styling_heading',
+			[
+				'label' => esc_html__( 'Input', 'tablentor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -210,7 +249,7 @@ class Table_CSV extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'search_input_typography',
-				'selector' => '{{WRAPPER}} .tablentor-bt-search-input',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-search .dt-input',
 			]
 		);
 
@@ -220,7 +259,7 @@ class Table_CSV extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'tablentor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tablentor-bt-search-input' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-search .dt-input' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -229,7 +268,7 @@ class Table_CSV extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'search_input_border',
-				'selector' => '{{WRAPPER}} .tablentor-bt-search-input',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-search .dt-input',
 			]
 		);
 
@@ -248,7 +287,7 @@ class Table_CSV extends Widget_Base {
 					'isLinked' => true,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tablentor-bt-search-input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-search .dt-input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -268,7 +307,7 @@ class Table_CSV extends Widget_Base {
 					'isLinked' => true,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tablentor-bt-search-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-search .dt-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -288,7 +327,151 @@ class Table_CSV extends Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tablentor-bt-search-input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-search .dt-input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * Table Styling
+		 *  
+		 */
+		$this->start_controls_section(
+			'entries_per_page_styling',
+			[
+				'label' => __( 'Entries Per Page', 'tablentor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'first_row_as_header' => 'yes',
+					'enable_data_table'   => 'yes',
+					'pagination'          => 'yes',
+					'top_bar_pagination'  => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_info_styling_heading',
+			[
+				'label' => esc_html__( 'Info', 'tablentor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'entries_per_page_label_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-length label',
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_label_color',
+			[
+				'label' => esc_html__( 'Color', 'tablentor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-length label' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_styling_heading',
+			[
+				'label' => esc_html__( 'Dropdown', 'tablentor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'entries_per_page_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-length select.dt-input',
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_text_color',
+			[
+				'label' => esc_html__( 'Text Color', 'tablentor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-length select.dt-input' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'entries_per_page_border',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-length select.dt-input',
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_border_radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'tablentor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'default' => [
+					'top'    => 4,
+					'right'  => 4,
+					'bottom' => 4,
+					'left'   => 4,
+					'unit'   => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-length select.dt-input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_border_padding',
+			[
+				'label' => esc_html__( 'Padding', 'tablentor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'default' => [
+					'top'    => 5,
+					'right'  => 5,
+					'bottom' => 5,
+					'left'   => 5,
+					'unit'   => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-length select.dt-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'entries_per_page_border_margin',
+			[
+				'label' => esc_html__( 'Margin', 'tablentor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'default' => [
+					'top'    => 0,
+					'right'  => 0,
+					'bottom' => 10,
+					'left'   => 0,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-length select.dt-input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
