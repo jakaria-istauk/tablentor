@@ -479,6 +479,129 @@ class Table_CSV extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
+		 * Table heading Styling
+		 *  
+		 */
+		$this->start_controls_section(
+			'table_heading',
+			[
+				'label' => __( 'Table Heading', 'tablentor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'soring_icon_color',
+			[
+				'label'     => esc_html__( 'Sorting Icon Color', 'tablentor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv .dt-column-order:before' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv .dt-column-order:after' => 'color: {{VALUE}}',
+				],
+				'condition' => [
+					'first_row_as_header' => 'yes',
+					'enable_data_table'   => 'yes',
+					'sorting'             => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'header_content_typography',
+			[
+				'label' 	   => __( 'Alignment', 'tablentor' ),
+				'type' 		   => Controls_Manager::CHOOSE,
+				'options' 	   => [
+					'left' 		=> [
+						'title' 	=> __( 'Left', 'tablentor' ),
+						'icon' 		=> 'eicon-text-align-left',
+					],
+					'center' 	=> [
+						'title' 	=> __( 'Center', 'tablentor' ),
+						'icon' 		=> 'eicon-text-align-center',
+					],
+					'right' 	=> [
+						'title' 	=> __( 'Right', 'tablentor' ),
+						'icon' 		=> 'eicon-text-align-right',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'content_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th',
+			]
+		);
+
+		$this->add_control(
+			'heading_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'tablentor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'table_heading_background',
+				'label' => __( 'Background', 'tablentor' ),
+				'types' => [ 'classic', 'gradient' ],
+				'exclude' => [ 'image' ],
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th',
+			]
+		);
+
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'table_row_border',
+				'label' => __( 'Border', 'tablentor' ),
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th',
+				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'table_row-border-radius',
+			[
+				'label' => __( 'Border Radius', 'tablentor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'separator'	=> 'after',
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'table_heading_padding',
+			[
+				'label' => __( 'Padding', 'tablentor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'separator'	=> 'before',
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv thead tr th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
 		 * Table Styling
 		 *  
 		 */
@@ -591,100 +714,6 @@ class Table_CSV extends Widget_Base {
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .ct-basic-table' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-		/**
-		 * Table heading Styling
-		 *  
-		 */
-		$this->start_controls_section(
-			'table_heading',
-			[
-				'label' => __( 'Table Heading', 'tablentor' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'header_content_typography',
-			[
-				'label' 	   => __( 'Alignment', 'tablentor' ),
-				'type' 		   => Controls_Manager::CHOOSE,
-				'options' 	   => [
-					'left' 		=> [
-						'title' 	=> __( 'Left', 'tablentor' ),
-						'icon' 		=> 'eicon-text-align-left',
-					],
-					'center' 	=> [
-						'title' 	=> __( 'Center', 'tablentor' ),
-						'icon' 		=> 'eicon-text-align-center',
-					],
-					'right' 	=> [
-						'title' 	=> __( 'Right', 'tablentor' ),
-						'icon' 		=> 'eicon-text-align-right',
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr th' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name' => 'content_typography',
-				'selector' => '{{WRAPPER}} .ct-basic-table tr th',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'table_heading_background',
-				'label' => __( 'Background', 'tablentor' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .ct-basic-table tr th',
-			]
-		);
-
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'table_row_border',
-				'label' => __( 'Border', 'tablentor' ),
-				'selector' => '{{WRAPPER}} .ct-basic-table tr th',
-				'separator'	=> 'before'
-			]
-		);
-
-		$this->add_control(
-			'table_row-border-radius',
-			[
-				'label' => __( 'Border Radius', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'after',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr th' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'table_heading_padding',
-			[
-				'label' => __( 'Padding', 'tablentor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'separator'	=> 'before',
-				'selectors' => [
-					'{{WRAPPER}} .ct-basic-table tr th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
