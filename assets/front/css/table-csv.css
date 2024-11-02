@@ -24,3 +24,8 @@
 .tablentor-table-csv-container .dt-container .dt-layout-row:last-child {
     margin-bottom: 0;
 }
+
+/* style for edit mode */
+.elementor-element-edit-mode .tablentor-table-csv-container .dt-container .dt-layout-row:last-child {
+    display: none;
+}

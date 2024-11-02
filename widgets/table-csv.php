@@ -825,8 +825,28 @@ class Table_CSV extends Widget_Base {
 		echo "</table>";
 
 		if ( $is_editor ) {
+			?>
+			<div class="dt-layout-row">
+				<div class="dt-layout-cell dt-layout-start">
+					<div class="dt-info" aria-live="polite" id="DataTables_Table_0_info" role="status">Showing 1 to 10 of 30 entries</div>
+				</div>
+				<div class="dt-layout-cell dt-layout-end">
+					<div class="dt-paging">
+						<nav aria-label="pagination">
+							<button class="dt-paging-button disabled first" role="link" type="button" aria-controls="DataTables_Table_0" aria-disabled="true" aria-label="First" data-dt-idx="first" tabindex="-1">«</button>
+							<button class="dt-paging-button disabled previous" role="link" type="button" aria-controls="DataTables_Table_0" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</button>
+							<button class="dt-paging-button current" role="link" type="button" aria-controls="DataTables_Table_0" aria-current="page" data-dt-idx="0">1</button>
+							<button class="dt-paging-button" role="link" type="button" aria-controls="DataTables_Table_0" data-dt-idx="1">2</button>
+							<button class="dt-paging-button" role="link" type="button" aria-controls="DataTables_Table_0" data-dt-idx="2">3</button>
+							<button class="dt-paging-button next" role="link" type="button" aria-controls="DataTables_Table_0" aria-label="Next" data-dt-idx="next">›</button>
+							<button class="dt-paging-button last" role="link" type="button" aria-controls="DataTables_Table_0" aria-label="Last" data-dt-idx="last">»</button>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<?php
 			echo '<div style="background-color:#e7f3fe; color: #31708f;border-color: #bce8f1;padding: 15px;margin-top: 20px;border-radius: 5px;border: 1px solid #ddd;font-family: Arial, sans-serif;">
-				<strong>' . esc_html__( 'Note:', 'tablentor' ) . '</strong> ' . esc_html__( 'All Data Will load on frontend', 'tablentor' ) . '
+				<strong>' . esc_html__( 'Note:', 'tablentor' ) . '</strong> ' . esc_html__( 'All data will load on the frontend, and pagination will function there as well.', 'tablentor' ) . '
 			</div>';
 		}
 		
