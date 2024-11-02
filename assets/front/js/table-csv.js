@@ -26,7 +26,7 @@ let TableCSV = function( $scope, $ ){
             }
 
             if ( 'no' === options?.paging_length ) {
-                tableWrapper.find('.dt-length').remove()
+                tableWrapper.find('.dt-length').remove();
             }
         }
     });
