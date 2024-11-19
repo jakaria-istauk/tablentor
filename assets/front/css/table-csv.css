@@ -29,3 +29,8 @@
 .elementor-element-edit-mode .tablentor-table-csv-container .dt-container .dt-layout-row:last-child {
     display: none;
 }
+.elementor-element-edit-mode .tablentor-dumy-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

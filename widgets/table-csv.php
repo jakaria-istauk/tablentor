@@ -824,9 +824,9 @@ class Table_CSV extends Widget_Base {
 		echo "</tbody>";
 		echo "</table>";
 
-		if ( $is_editor ) {
+		if ( $is_editor && 'yes' === $settings['pagination'] ) {
 			?>
-			<div class="tablentor-dumy-row">
+			<div class="tablentor-dumy-row dt-container">
 				<div class="dumy-column-start">
 					<div class="dt-info" aria-live="polite" role="status"><?php esc_html_e( "Showing 1 to {$row_count} of " . count( $rows ) . " entries", 'tablentor' ); ?></div>
 				</div>
