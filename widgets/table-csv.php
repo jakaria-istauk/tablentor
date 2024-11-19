@@ -706,6 +706,69 @@ class Table_CSV extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		/**
+		 * Table Footer/pagination Styling
+		 *  
+		 */
+		$this->start_controls_section(
+			'table_pagination_styling',
+			[
+				'label' => __( 'Pagination', 'tablentor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'first_row_as_header' => 'yes',
+					'enable_data_table'   => 'yes',
+					'pagination'          => 'yes',
+				]
+			]
+		);
+
+		$this->add_control(
+			'table_pagination_info',
+			[
+				'label' => esc_html__( 'Paging Info', 'tablentor' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'table_paging_info_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .dt-info',
+			]
+		);
+
+		$this->add_control(
+			'table_paging_info_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'tablentor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tablentor-table-csv-container .dt-info' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'table_pagination_items',
+			[
+				'label' => esc_html__( 'Buttons', 'tablentor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'table_paging_info_typography',
+				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv .dt-paging .pagination .dt-paging-button',
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
