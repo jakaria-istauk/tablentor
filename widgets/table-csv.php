@@ -763,10 +763,43 @@ class Table_CSV extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'table_paging_info_typography',
+				'name' => 'table_pagination_button_typography',
 				'selector' => '{{WRAPPER}} .tablentor-table-csv-container .tablentor-table-csv .dt-paging .pagination .dt-paging-button',
 			]
 		);
+
+		$this->start_controls_tabs(
+			'table_pagination_style_tabs'
+		);
+		
+		$this->start_controls_tab(
+			'table_pagination_style_tab_normal',
+			[
+				'label' => esc_html__( 'Normal', 'tablentor' ),
+			]
+		);
+		
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'table_pagination_style_tab_hover',
+			[
+				'label' => esc_html__( 'Hover', 'tablentor' ),
+			]
+		);
+		
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'table_pagination_style_tab_active',
+			[
+				'label' => esc_html__( 'Active', 'tablentor' ),
+			]
+		);
+		
+		$this->end_controls_tab();
+		
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
