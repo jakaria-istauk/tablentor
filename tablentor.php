@@ -4,7 +4,7 @@
  * Description: Create table using elementor.
  
  * Author: Jakaria Istauk
- * Version: 2.2.1
+ * Version: 3.0.0
  * Author URI: https://profiles.wordpress.org/jakariaistauk/
  * Text Domain: tablentor
  * Domain Path: /languages

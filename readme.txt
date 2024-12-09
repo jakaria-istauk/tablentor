@@ -2,9 +2,9 @@
 Contributors: jakariaistauk
 Tags: Elementor, Table designer, Elementor Addons, WooCommerce Elementor, Table, Table Creator, Table builder, Table customizer, WooCommerce
 Requires at least: 4.0
-Tested up to: 6.6
-Stable tag: 2.2.1
-Requires PHP: 6.0
+Tested up to: 6.7
+Stable tag: 3.0.0
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,10 @@ as many you want
 
 == Changelog ==
 
+= v3.0.0 - 2024-09-14 =
+* Added new widgets for CSV Data
+* Compatible with new wordpress Latest release
+* A few bug fixes and performance improved
 
 = v2.2.1 - 2024-09-14 =
 * Compatibility added for Elementor cache
