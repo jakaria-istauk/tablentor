@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Tablentor
- * Description: Create table using elementor.
+ * Description: Create tables effortlessly in Elementor using our Table Widget. You can either build tables manually by adding rows and columns or render them dynamically from a CSV file
  
  * Author: Jakaria Istauk
- * Version: 3.0.0
+ * Version: 3.0.0 
  * Author URI: https://profiles.wordpress.org/jakariaistauk/
  * Text Domain: tablentor
  * Domain Path: /languages
