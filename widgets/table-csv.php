@@ -150,7 +150,7 @@ class Table_CSV extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'tablentor' ),
 				'label_off'    => esc_html__( 'Hide', 'tablentor' ),
 				'return_value' => 'yes',
-				'default'      => 'no',
+				'default'      => 'yes',
 			]
 		);
 
@@ -162,7 +162,7 @@ class Table_CSV extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'tablentor' ),
 				'label_off'    => esc_html__( 'Hide', 'tablentor' ),
 				'return_value' => 'yes',
-				'default'      => 'no',
+				'default'      => 'yes',
 			]
 		);
 
@@ -174,7 +174,7 @@ class Table_CSV extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'tablentor' ),
 				'label_off'    => esc_html__( 'Hide', 'tablentor' ),
 				'return_value' => 'yes',
-				'default'      => 'no',
+				'default'      => 'yes',
 				'condition'   => [
 					'pagination' => 'yes',
 				]
@@ -189,7 +189,7 @@ class Table_CSV extends Widget_Base {
 				'label_on'     => esc_html__( 'Enable', 'tablentor' ),
 				'label_off'    => esc_html__( 'Disable', 'tablentor' ),
 				'return_value' => 'yes',
-				'default'      => 'no',
+				'default'      => 'yes',
 			]
 		);
 
