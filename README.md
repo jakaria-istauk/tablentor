@@ -176,30 +176,6 @@ We welcome contributions to Tablentor! Here's how you can help:
 - Include WordPress and plugin version information
 - Attach screenshots if applicable
 
-## 📝 Changelog
-
-### v3.0.0 (2024-09-14)
-- ✨ Added new CSV Table widget for dynamic data import
-- 🎨 Enhanced table responsiveness across all devices
-- 🔧 Improved compatibility with WordPress 6.7
-- ⚡ Added DataTables integration for advanced table features
-- 🐛 Performance optimizations and bug fixes
-- 🎯 Updated styling controls with more customization options
-
-### v2.2.1 (2024-09-14)
-- 🔧 Added compatibility with Elementor cache system
-- ⚡ Improved performance for large tables
-- 🐛 Fixed minor styling issues
-- 🔄 Enhanced WordPress 6.6 compatibility
-
-### v2.2.0 (2024-03-28)
-- 🔍 Introduced live search functionality for tables
-- 🎯 Added unique widget identifiers for better targeting
-- ⚡ Improved table rendering performance
-- 📱 Enhanced mobile responsiveness
-
-[View full changelog](CHANGELOG.md)
-
 ## 📄 License
 
 This project is licensed under the GPL v2 or later - see the [LICENSE](LICENSE) file for details.
@@ -207,7 +183,7 @@ This project is licensed under the GPL v2 or later - see the [LICENSE](LICENSE) 
 ## 👨‍💻 Author
 
 **Jakaria Istauk**
-- Website: [jakariaistauk.com](https://jakariaistauk.com)
+- Website: [jakaria.com.bd](https://jakaria.com.bd)
 - WordPress Profile: [@jakariaistauk](https://profiles.wordpress.org/jakariaistauk/)
 - Email: jakariamd35@gmail.com
 
