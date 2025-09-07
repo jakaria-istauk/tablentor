@@ -1,6 +1,6 @@
 === Tablentor – Smart Table Builder for Elementor ===
 Contributors: jakariaistauk
-Tags: elementor, table builder, csv import, data tables, responsive tables, table designer, elementor addon
+Tags: Elementor, Elementor Addons, Table Builder, WooCommerce, Table Designer
 Requires at least: 5.0
 Tested up to: 6.7
 Stable tag: 3.0.0
