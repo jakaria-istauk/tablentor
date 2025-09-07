@@ -206,7 +206,6 @@ New search functionality and performance improvements. Update recommended.
 For support, feature requests, or bug reports, please visit:
 * **Plugin Support**: [WordPress.org Support Forum](https://wordpress.org/support/plugin/tablentor/)
 * **Developer Contact**: [Jakaria Istauk Profile](https://profiles.wordpress.org/jakariaistauk/)
-* **Email**: jakariamd35@gmail.com
 
 == Contributing ==
 
