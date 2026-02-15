@@ -142,7 +142,7 @@ Yes, Tablentor is compatible with popular caching plugins and Elementor's built-
 == Changelog ==
 
 = v3.0.1 - 2026-02-15 =
-* Compitable with Latest WordPress Version
+* Compatible with Latest WordPress Version
 * Few minor bug fixes & improvements
 
 = v3.0.0 - 2024-09-14 =
