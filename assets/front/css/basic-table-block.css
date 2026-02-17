@@ -1,16 +1,24 @@
 .wp-block-tablentor-basic-table {
 	overflow-x: auto;
+	background: var(--tablentor-table-bg, #fff);
+	border: var(--tablentor-table-border-width, 1px) solid var(--tablentor-table-border-color, #d1d5db);
+	border-radius: var(--tablentor-table-border-radius, 0);
+	padding: var(--tablentor-table-padding, 0);
+	margin: var(--tablentor-table-margin, 0);
+	box-shadow: var(--tablentor-table-box-shadow, none);
 }
 
 .wp-block-tablentor-basic-table .tablentor-bt-search {
 	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 10px;
+	justify-content: var(--tablentor-search-align, flex-end);
 }
 
 .wp-block-tablentor-basic-table .tablentor-bt-search-input {
-	min-width: 180px;
+	width: var(--tablentor-search-width, 220px);
+	max-width: 100%;
 	padding: var(--tablentor-search-padding, 8px 10px);
+	margin: var(--tablentor-search-margin, 0 0 10px 0);
+	font-size: var(--tablentor-search-font-size, 14px);
 	border: var(--tablentor-search-border-width, 1px) solid var(--tablentor-search-border-color, #d1d5db);
 	border-radius: var(--tablentor-search-border-radius, 4px);
 	background: var(--tablentor-search-bg, #fff);
@@ -20,28 +28,44 @@
 .wp-block-tablentor-basic-table .ct-basic-table {
 	width: 100%;
 	border-collapse: collapse;
+	table-layout: fixed;
 }
 
 .wp-block-tablentor-basic-table .ct-basic-table th,
 .wp-block-tablentor-basic-table .ct-basic-table td {
-	border: var(--tablentor-border-width, 1px) solid var(--tablentor-border, #d1d5db);
-	padding: var(--tablentor-cell-padding, 10px);
-	text-align: var(--tablentor-align, left);
+	width: var(--tablentor-column-width, auto);
 	vertical-align: top;
+	overflow: hidden;
 }
 
 .wp-block-tablentor-basic-table .ct-basic-table th {
-	background: var(--tablentor-header-bg, #f4f4f5);
+	text-align: var(--tablentor-header-align, left);
 	color: var(--tablentor-header-text, #1f2937);
+	background: var(--tablentor-header-bg, #f4f4f5);
+	border: var(--tablentor-header-border-width, 1px) solid var(--tablentor-header-border-color, #d1d5db);
+	border-radius: var(--tablentor-header-border-radius, 0);
+	padding: var(--tablentor-header-padding, 10px);
+	font-size: var(--tablentor-header-font-size, 16px);
+	font-weight: var(--tablentor-header-font-weight, 600);
 }
 
 .wp-block-tablentor-basic-table .ct-basic-table td {
-	background: var(--tablentor-body-bg, #fff);
+	text-align: var(--tablentor-body-align, left);
 	color: var(--tablentor-body-text, #111827);
+	background: var(--tablentor-body-bg, #fff);
+	border: var(--tablentor-body-border-width, 1px) solid var(--tablentor-body-border-color, #d1d5db);
+	border-radius: var(--tablentor-body-border-radius, 0);
+	padding: var(--tablentor-body-padding, 10px);
+	font-size: var(--tablentor-body-font-size, 15px);
+	font-weight: var(--tablentor-body-font-weight, 400);
 }
 
 .wp-block-tablentor-basic-table .ct-basic-table img {
 	max-width: 100%;
-	height: auto;
+	width: var(--tablentor-image-width, auto);
+	height: var(--tablentor-image-height, auto);
+	border: var(--tablentor-image-border-width, 0) solid var(--tablentor-image-border-color, #d1d5db);
+	border-radius: var(--tablentor-image-border-radius, 0);
 	display: inline-block;
+	object-fit: cover;
 }
