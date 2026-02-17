@@ -87,6 +87,9 @@ final class Plugin {
         add_action( 'elementor/widgets/widgets_registered', [ $widgets, 'register_widgets' ] );
         add_action( 'elementor/frontend/after_enqueue_styles', [ $widgets, 'enqueue_styles' ] );
         add_action( 'elementor/frontend/after_enqueue_scripts', [ $widgets, 'enqueue_scripts' ] );
+
+        $blocks = new Blocks;
+        add_action( 'init', [ $blocks, 'register_blocks' ] );
     }
  
     /**

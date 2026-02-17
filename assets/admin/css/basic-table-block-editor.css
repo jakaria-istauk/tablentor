@@ -1,0 +1,12 @@
+.editor-styles-wrapper .wp-block-tablentor-basic-table .ct-basic-table {
+	table-layout: fixed;
+}
+
+.editor-styles-wrapper .wp-block-tablentor-basic-table .ct-basic-table th,
+.editor-styles-wrapper .wp-block-tablentor-basic-table .ct-basic-table td {
+	min-width: 90px;
+}
+
+.editor-styles-wrapper .wp-block-tablentor-basic-table .ct-basic-table .block-editor-rich-text__editable {
+	min-height: 24px;
+}
