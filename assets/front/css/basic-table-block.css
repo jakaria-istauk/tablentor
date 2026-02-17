@@ -10,10 +10,11 @@
 
 .wp-block-tablentor-basic-table .tablentor-bt-search-input {
 	min-width: 180px;
-	padding: 8px 10px;
-	border: 1px solid var(--tablentor-border, #d1d5db);
-	border-radius: 4px;
-	background: #fff;
+	padding: var(--tablentor-search-padding, 8px 10px);
+	border: var(--tablentor-search-border-width, 1px) solid var(--tablentor-search-border-color, #d1d5db);
+	border-radius: var(--tablentor-search-border-radius, 4px);
+	background: var(--tablentor-search-bg, #fff);
+	color: var(--tablentor-search-text, #111827);
 }
 
 .wp-block-tablentor-basic-table .ct-basic-table {
@@ -23,7 +24,7 @@
 
 .wp-block-tablentor-basic-table .ct-basic-table th,
 .wp-block-tablentor-basic-table .ct-basic-table td {
-	border: 1px solid var(--tablentor-border, #d1d5db);
+	border: var(--tablentor-border-width, 1px) solid var(--tablentor-border, #d1d5db);
 	padding: var(--tablentor-cell-padding, 10px);
 	text-align: var(--tablentor-align, left);
 	vertical-align: top;
