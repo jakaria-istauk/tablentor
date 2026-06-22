@@ -4,10 +4,15 @@
  * Description: Create tables effortlessly in Elementor using our Table Widget. You can either build tables manually by adding rows and columns or render them dynamically from a CSV file
  
  * Author: Jakaria Istauk
- * Version: 3.0.1
+ * Version: 3.0.2
  * Author URI: https://profiles.wordpress.org/jakariaistauk/
+ * Requires at least: 5.0
+ * Requires PHP: 7.4
+ * Requires Plugins: elementor
  * Text Domain: tablentor
  * Domain Path: /languages
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * Comparison Table is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,7 +71,7 @@ final class Plugin {
         define( 'CMPRTBL_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
         define( 'CMPRTBL_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
         define( 'CMPRTBL_ASSET_DIR', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets/' ) );
-        define( 'CMPRTBL_VERSION', '3.0.1' );
+        define( 'CMPRTBL_VERSION', '3.0.2' );
         define( 'CMPRTBL_DEV_MODE', file_exists( CMPRTBL_PATH . '/.git' ) );
     }
 
@@ -78,12 +83,14 @@ final class Plugin {
         $admin = new Admin;
         add_action( 'plugins_loaded', [ $admin, 'i18n'] );
         add_action( 'elementor/editor/after_enqueue_styles', [ $admin, 'editor_enqueue_scripts'] );
+        add_action( 'elementor/editor/after_enqueue_scripts', [ $admin, 'editor_enqueue_js'] );
 
         $front = new Front;
         add_action( 'wp_head', [ $front, 'head' ] );
 
         $widgets = new Widgets;
         // add_action( 'elementor/elements/categories_registered', [ $widgets, 'register_category' ] );
+        add_action( 'elementor/controls/register', [ $widgets, 'register_controls' ] );
         add_action( 'elementor/widgets/widgets_registered', [ $widgets, 'register_widgets' ] );
         add_action( 'elementor/frontend/after_enqueue_styles', [ $widgets, 'enqueue_styles' ] );
         add_action( 'elementor/frontend/after_enqueue_scripts', [ $widgets, 'enqueue_scripts' ] );

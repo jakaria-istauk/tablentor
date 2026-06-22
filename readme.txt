@@ -2,8 +2,8 @@
 Contributors: jakariaistauk
 Tags: Elementor, Elementor Addons, Table Builder, WooCommerce, Table Designer
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 3.0.1
+Tested up to: 7.0
+Stable tag: 3.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,10 @@ Yes, Tablentor is compatible with popular caching plugins and Elementor's built-
 6. **DataTables Features** - Advanced pagination, sorting, and filtering options
 
 == Changelog ==
+
+= v3.0.2 - 2026-06-22 =
+* Added a CSV file upload controller
+* Few minor bug fixes & improvements
 
 = v3.0.1 - 2026-02-15 =
 * Compatible with Latest WordPress Version
