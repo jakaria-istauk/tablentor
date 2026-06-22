@@ -1014,20 +1014,24 @@ class Table_CSV extends Widget_Base {
 
 		echo "<tbody>";
 		$row_count = 0;
+		$tr_content = '';
 		foreach ( $rows as $key => $line ) {
 			if ( ! empty( trim( $line ) ) ) {
 				$columns = str_getcsv($line);
-				echo '<tr>';
-				foreach( $columns as $column ) {
-					echo "<td>" . $this->parse_text_editor( $column ) . "</td>";
+				$tr_content .= "<tr class=tablentor-csv-row-{$key}>";
+				foreach( $columns as $col_key => $column ) {
+					$tr_content .= "<td class=tablentor-csv-cell-{$key}-{$col_key}>" . $this->parse_text_editor( $column ) . "</td>";
 				}
-				echo '</tr>';
+				$tr_content .= '</tr>';
 			}
 
 			$row_count ++;
 			if ( $is_editor && $row_count > 12 ) {
 				break;
 			}
+		}
+		if( !empty( $tr_content ) ){
+			echo wp_kses_post( $tr_content );
 		}
 		echo "</tbody>";
 		echo "</table>";
