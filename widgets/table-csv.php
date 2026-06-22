@@ -61,7 +61,7 @@ class Table_CSV extends Widget_Base {
 			'csv_type',
 			[
 				'label'   => esc_html__( 'CSV Type', 'tablentor' ),
-				'type'    => Controls_Manager::HIDDEN,
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'text' => [
 						'title' => esc_html__( 'Text', 'tablentor' ),
@@ -917,21 +917,31 @@ class Table_CSV extends Widget_Base {
 			$csv_text = $settings['csv_text'];
 		} else if ( 'file' === $settings['csv_type'] ) {
 			if ( ! empty( $settings['csv_file']['url'] ) ) {
-				$fileExtension = pathinfo($settings['csv_file']['url'], PATHINFO_EXTENSION );
-				if ( strtolower( $fileExtension) !== 'csv' ) {
+				$csv_url = esc_url_raw( $settings['csv_file']['url'] );
+
+				// Only allow http/https. Blocks file://, ftp://, etc.
+				$scheme = strtolower( (string) wp_parse_url( $csv_url, PHP_URL_SCHEME ) );
+				if ( ! in_array( $scheme, [ 'http', 'https' ], true ) ) {
+					esc_html_e( 'Error: Invalid CSV file URL.', 'tablentor' );
+					return;
+				}
+
+				// Validate extension against the URL path only (ignore query/fragment).
+				$fileExtension = pathinfo( (string) wp_parse_url( $csv_url, PHP_URL_PATH ), PATHINFO_EXTENSION );
+				if ( strtolower( $fileExtension ) !== 'csv' ) {
 					esc_html_e( 'Error: The file is not a CSV.', 'tablentor' );
 					return;
 				}
 
-				$csvContent = file_get_contents($settings['csv_file']['url'] );
+				// wp_safe_remote_get() blocks loopback / private / link-local hosts (SSRF protection).
+				$response = wp_safe_remote_get( $csv_url, [ 'timeout' => 10 ] );
 
-				if ($csvContent === false) {
-					echo "Error: Unable to retrieve the CSV file.";
-					return [];
+				if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+					esc_html_e( 'Error: Unable to retrieve the CSV file.', 'tablentor' );
+					return;
 				}
 
-				// Split CSV content into rows by newline
-				$rows = preg_split('/\r\n|\n|\r/', trim($csvContent));
+				$csv_text = wp_remote_retrieve_body( $response );
 			}
 		}
 
