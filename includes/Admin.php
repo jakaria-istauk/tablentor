@@ -22,6 +22,19 @@ class Admin{
     }
 
     public function editor_enqueue_scripts(){
-        wp_enqueue_style( 'tablentor-editor', CMPRTBL_ASSET_DIR . "admin/css/editor.css", array(), time() );
+        wp_enqueue_style( 'tablentor-editor', CMPRTBL_ASSET_DIR . "admin/css/editor.css", array(), CMPRTBL_VERSION );
+	}
+
+    /**
+     * Enqueue editor JS (CSV media control view).
+     */
+    public function editor_enqueue_js(){
+        wp_enqueue_script(
+            'tablentor-csv-media-control',
+            CMPRTBL_ASSET_DIR . "admin/js/csv-media-control.js",
+            array( 'jquery', 'elementor-editor' ),
+            CMPRTBL_VERSION,
+            true
+        );
 	}
 }

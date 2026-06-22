@@ -94,11 +94,11 @@ class Table_CSV extends Widget_Base {
 		$this->add_control(
 			'csv_file',
 			[
-				'label'       => esc_html__( 'File Url', 'tablentor' ),
-				'type'        => Controls_Manager::URL,
-				'options'     => false,
+				'label'       => esc_html__( 'CSV File', 'tablentor' ),
+				'type'        => Control_Csv_Media::TYPE,
+				'media_types' => [ 'text/csv' ],
 				'label_block' => true,
-				'placeholder' => esc_html__( 'Paste your csv URL', 'tablentor' ),
+				'description' => esc_html__( 'Upload or select a CSV (.csv) file from the Media Library.', 'tablentor' ),
 				'condition'   => [
 					'csv_type' => 'file'
 				]
@@ -916,32 +916,30 @@ class Table_CSV extends Widget_Base {
 		if ( 'text' === $settings['csv_type'] ) {
 			$csv_text = $settings['csv_text'];
 		} else if ( 'file' === $settings['csv_type'] ) {
-			if ( ! empty( $settings['csv_file']['url'] ) ) {
-				$csv_url = esc_url_raw( $settings['csv_file']['url'] );
+			// Only Media Library attachments are accepted (uploader-only control).
+			// Reading from the local attachment by ID — never fetching a remote
+			// URL — eliminates the SSRF / file:// vector entirely.
+			$attachment_id = isset( $settings['csv_file']['id'] ) ? absint( $settings['csv_file']['id'] ) : 0;
 
-				// Only allow http/https. Blocks file://, ftp://, etc.
-				$scheme = strtolower( (string) wp_parse_url( $csv_url, PHP_URL_SCHEME ) );
-				if ( ! in_array( $scheme, [ 'http', 'https' ], true ) ) {
-					esc_html_e( 'Error: Invalid CSV file URL.', 'tablentor' );
-					return;
-				}
+			if ( $attachment_id ) {
+				$file_path = get_attached_file( $attachment_id );
 
-				// Validate extension against the URL path only (ignore query/fragment).
-				$fileExtension = pathinfo( (string) wp_parse_url( $csv_url, PHP_URL_PATH ), PATHINFO_EXTENSION );
-				if ( strtolower( $fileExtension ) !== 'csv' ) {
-					esc_html_e( 'Error: The file is not a CSV.', 'tablentor' );
-					return;
-				}
-
-				// wp_safe_remote_get() blocks loopback / private / link-local hosts (SSRF protection).
-				$response = wp_safe_remote_get( $csv_url, [ 'timeout' => 10 ] );
-
-				if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+				if ( ! $file_path || ! file_exists( $file_path ) ) {
 					esc_html_e( 'Error: Unable to retrieve the CSV file.', 'tablentor' );
 					return;
 				}
 
-				$csv_text = wp_remote_retrieve_body( $response );
+				if ( strtolower( pathinfo( $file_path, PATHINFO_EXTENSION ) ) !== 'csv' ) {
+					esc_html_e( 'Error: The file is not a CSV.', 'tablentor' );
+					return;
+				}
+
+				$csv_text = file_get_contents( $file_path );
+
+				if ( false === $csv_text ) {
+					esc_html_e( 'Error: Unable to retrieve the CSV file.', 'tablentor' );
+					return;
+				}
 			}
 		}
 

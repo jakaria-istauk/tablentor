@@ -60,13 +60,25 @@ class Widgets{
     }
 
 
+    /**
+     * Register custom Elementor controls.
+     *
+     * @since 3.0.3
+     */
+    public function register_controls( $controls_manager ) {
+        require_once( CMPRTBL_DIR . "/widgets/controls/csv-media.php" );
+
+        $controls_manager->register( new Control_Csv_Media() );
+    }
+
+
     public function enqueue_styles(){
         wp_enqueue_style( 'tablentor-data-table', CMPRTBL_ASSET_DIR . "front/css/data-table.min.css", array(), CMPRTBL_VERSION );
-        wp_enqueue_style( 'tablentor-table-csv', CMPRTBL_ASSET_DIR . "front/css/table-csv.css", array(), time() );
+        wp_enqueue_style( 'tablentor-table-csv', CMPRTBL_ASSET_DIR . "front/css/table-csv.css", array(), CMPRTBL_VERSION );
     }
 
     public function enqueue_scripts() {
         wp_enqueue_script( 'tablentor-data-table', CMPRTBL_ASSET_DIR . "front/js/data-table.min.js", [ 'jquery' ], CMPRTBL_VERSION, true );
-        wp_enqueue_script( 'tablentor-table-csv', CMPRTBL_ASSET_DIR . "front/js/table-csv.js", [ 'jquery' ], time(), true );
+        wp_enqueue_script( 'tablentor-table-csv', CMPRTBL_ASSET_DIR . "front/js/table-csv.js", [ 'jquery' ], CMPRTBL_VERSION, true );
     }
 }
